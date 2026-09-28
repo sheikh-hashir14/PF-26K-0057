@@ -1,0 +1,17 @@
+START
+Input quantity (q), price per item (p), discount percentage (d), tax percentage (t)
+If q <= 0
+    Then Output "Invalid quantity: must be greater than 0" and terminate
+Else If p <= 0
+    Then Output "Invalid price: must be greater than 0" and terminate
+Else If d < 0 or d >= 100
+    Then Output "Invalid discount: must be from 0 to below 100" and terminate
+Else If t < 0 or t >= 100
+    Then Output "Invalid tax: must be from 0 to below 100" and terminate
+ Else
+    Calculate subtotal: s = q * p
+    Calculate discounted amount: a = s - (s * d) / 100
+    Calculate final bill = a + (a * t) / 100
+Display the bill document: subtotal, discount, discounted amount, tax, final bill
+End If
+END
