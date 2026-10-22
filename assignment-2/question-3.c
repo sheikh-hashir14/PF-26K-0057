@@ -66,9 +66,28 @@ void sensorAnalysis(int n, int row[n], int sensorId){
     printf("Number of Critical Readings: %d\n", crit_count);
     printf("Number of Warning Readings: %d\n", warn_count);
     printf("Longest streak (>= 35C): %d hours\n", longest);
-
-
 }
+
+int highestAverage(int m, int n, int readings[m][n]){
+    int highest_avg_Sensor = 0;
+    float highest_Avg = -1;
+
+    for(int i = 0; i < m; i++){
+        int sum = 0;
+        for(int j = 0; j < n; j++){
+            sum += readings[i][j];
+        }
+        float avg = (float)sum / n;
+
+        if(avg > highest_Avg){
+            highest_Avg = avg;
+            highest_avg_Sensor = i+1;
+        }
+    }
+    return highest_avg_Sensor;
+}
+
+
 
 int main(){
 
@@ -86,5 +105,17 @@ int main(){
     for(int i=0 ; i<sensors ; i++){
         sensorAnalysis(hours, readings[i], i+1);
     }
+
+    int best = highestAverage(sensors, hours, readings);
+
+    int sum = 0;
+    for (int j = 0; j < hours; j++) {
+        sum += readings[best - 1][j];     // best - 1 to get the row index
+    }
+
+    printf("\n-----FINAL REPORT-----\n");
+    printf("Sensor with highest average: Sensor %d\n", best);      
+    printf("Its average temperature: %.2f\n", (float)sum / hours);
+
     return 0;
 }
